@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
   <title>THIRM</title>
 </head>
@@ -53,7 +54,7 @@
             </a>
           </div>
         </div>
-        
+
       </div>
     </div>
   </nav>
@@ -136,79 +137,10 @@
 
 
 
-
-
-
-  <div class="columns">
-    <div class="column is-8">
-      <div class="box">
-        <div id="chartdiv"></div>
-      </div>
-    </div>
-    <div class="column">
-      <div class="box">
-
-        <div class="content">
-          <div class="field">
-            <label class="label"> <span class="coin1"></span> Amount</label>
-            <div class="control">
-              <input class="input is-small" type="text" placeholder="Enter Amount" id="boonk1" onchange="pingdom(2)">
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="label">Cost</label>
-            <div class="control">
-              <input class="input is-small" type="text" placeholder="Enter Amount" id="pingdom">
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="label"> <span class="coin2"></span> Amount</label>
-            <div class="control">
-              <input class="input is-small" type="text" placeholder="Enter Amount" id="boonk2" onchange="pingdom(1)">
-            </div>
-          </div>
-
-          <div class="field is-grouped">
-            <div class="control">
-              <button class="button is-primary is-inverted is-small" onclick=create(2)>BUY_ <span class="coin2"></span></button>
-            </div>
-            <div class="control">
-              <button class="button is-danger is-inverted is-small" onclick=create(1)>SELL_ <span class="coin2"></span></button>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-
-      <div class="box">
-
-        <table id="myTablemy" class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-          <thead>
-            <tr>
-              <th scope="col">id</th>
-              <th scope="col">have</th>
-              <th scope="col">want</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-        </table>
-
-      </div>
-
-
-    </div>
-  </div>
-
-
-
-
-
   <div class="columns">
     <div class="column">
       <div class="box">
+              BUY ORDERBOOK
         <table id="tab1" class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
           <thead>
             <tr>
@@ -222,8 +154,43 @@
         </table>
       </div>
     </div>
+
+    <div class="column is-2">      <div class="box">
+    <div class="content">
+      <div class="field">
+        <label class="label"> <span class="coin1"></span> Amount</label>
+        <div class="control">
+          <input class="input is-small" type="text" placeholder="Enter Amount" id="boonk1" onchange="pingdom(2)">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Cost</label>
+        <div class="control">
+          <input class="input is-small" type="text" placeholder="Enter Amount" id="pingdom">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label"> <span class="coin2"></span> Amount</label>
+        <div class="control">
+          <input class="input is-small" type="text" placeholder="Enter Amount" id="boonk2" onchange="pingdom(1)">
+        </div>
+      </div>
+
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-primary is-inverted is-small" onclick=create(2)>BUY_ <span class="coin2"></span></button>
+        </div>
+        <div class="control">
+          <button class="button is-danger is-inverted is-small" onclick=create(1)>SELL_ <span class="coin2"></span></button>
+        </div>
+      </div></div>
+    </div>  </div>
+
     <div class="column">
       <div class="box">
+              SELL ORDERBOOK
         <table id="tab2" class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
           <thead>
             <tr>
@@ -241,8 +208,10 @@
   </div>
 
 
-
+  <div class="columns">
+    <div class="column">
   <div class="box">
+    BUY HISTORY
     <table id="myTable2" class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
       <thead>
         <tr>
@@ -257,7 +226,81 @@
       </thead>
     </table>
   </div>
+  </div>
+  <div class="column">
+<div class="box">
+    SELL HISTORY
+  <table id="myTable22" class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+    <thead>
+      <tr>
+        <th scope="col">time</th>
+        <th scope="col">id</th>
+        <th scope="col">have</th>
+        <th scope="col">want</th>
+        <th scope="col">Have Amount (A)</th>
+        <th scope="col">Rate A/B</th>
+        <th scope="col">Want Amount (B)</th>
+      </tr>
+    </thead>
+  </table>
+</div>
+</div>
+</div>
 
+
+
+<div class="columns">
+  <div class="column">
+    <div class="box">
+OPEN ORDERS
+      <table id="myTablemy" class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">have</th>
+            <th scope="col">want</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+      </table>
+
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="box">
+COMPLETED BUY ORDERS
+      <table id="myTablemy2" class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">have</th>
+            <th scope="col">want</th>
+          </tr>
+        </thead>
+      </table>
+
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="box">
+COMPLETED SELL ORDERS
+      <table id="myTablemy3" class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">have</th>
+            <th scope="col">want</th>
+          </tr>
+        </thead>
+      </table>
+
+    </div>
+  </div>
+
+
+</div>
 
 
 
@@ -280,13 +323,9 @@
     </div>
   </footer>
 
-  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-  <script src="https://www.amcharts.com/lib/4/core.js"></script>
-  <script src="https://www.amcharts.com/lib/4/charts.js"></script>
-  <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
-  <script src="trade.js?a=2"></script>
-  <script src="chart-core.js"></script>
 
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script src="trade.js"></script>
 </body>
 
 </html>
