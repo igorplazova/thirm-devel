@@ -125,8 +125,6 @@ mydata.forEach(function(elementp) {
    var row = table.insertRow(-1);
    var pukki = elementp.haveamount/elementp.wantamount;
 
-	 graph(elementp.time,pukki);
-
    row.insertCell(0).innerHTML = `${elementp.time}`;
    row.insertCell(1).innerHTML = `${elementp.id}`;
    row.insertCell(2).innerHTML = `${elementp.have}`;
@@ -155,8 +153,6 @@ mydata.forEach(function(elementp) {
     var table = document.getElementById("myTable22");
     var row = table.insertRow(-1);
     var pukki = elementp.wantamount/elementp.haveamount;
-
-	 graph(elementp.time,pukki);
 
     row.insertCell(0).innerHTML = `${elementp.time}`;
     row.insertCell(1).innerHTML = `${elementp.id}`;
