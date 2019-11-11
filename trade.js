@@ -167,7 +167,7 @@ function create(input){
 
 $.ajax({
    type : "GET",
-   url : "https://api.thirm.com/create?have="+ inputnowhave + "&want=" + inputnowwant + "&haveamount=" + inputnowhaveamount +  "&wantamount=" + inputnowwantamount,
+   url : "https://api.thirm.com/make?have="+ inputnowhave + "&want=" + inputnowwant + "&haveamount=" + inputnowhaveamount +  "&wantamount=" + inputnowwantamount,
    beforeSend: function(xhr){xhr.setRequestHeader('token', usertoken);},
    success : function(result) {
      console.log("sucess");
