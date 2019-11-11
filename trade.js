@@ -50,7 +50,7 @@ $.ajax({
    url : "https://api.thirm.com/account",
    beforeSend: function(xhr){xhr.setRequestHeader('token', usertoken);},
    success : function(result) {
-	 mydata = JSON.parse(result);
+	 mydata = result;
          console.log(mydata);
 
 	   	 document.getElementById("btcbalance").innerText = mydata.btc + " BTC";
@@ -91,7 +91,7 @@ $.ajax({
    url : "https://api.thirm.com/orderhistory?have="+ coin1 +"&want="+coin2,
    beforeSend: function(xhr){xhr.setRequestHeader('token', usertoken);},
    success : function(result) {
-   mydata = JSON.parse(result);
+   mydata = result;
 
 mydata.forEach(function(elementp) {
    var table = document.getElementById("myTable2");
@@ -212,7 +212,7 @@ $.ajax({
    beforeSend: function(xhr){xhr.setRequestHeader('token', usertoken);},
    success : function(result) {
      console.log("sucess");
-     mydata = JSON.parse(result);
+     mydata = result;
      document.getElementById("depositspan").value = mydata.address;
    },
    error : function(result) {
@@ -227,7 +227,7 @@ $.ajax({
    url : "https://api.thirm.com/orderbook?orderby=0&have="+coin1+"&want="+coin2,
    beforeSend: function(xhr){xhr.setRequestHeader('token', usertoken);},
    success : function(result) {
-   mydata = JSON.parse(result);
+   mydata = result;
 
 mydata.forEach(function(elementp) {
    var table = document.getElementById("tab1");
@@ -253,7 +253,7 @@ $.ajax({
    url : "https://api.thirm.com/orderbook?orderby=1&have="+coin2+"&want="+coin1,
    beforeSend: function(xhr){xhr.setRequestHeader('token', usertoken);},
    success : function(result) {
-	 mydata = JSON.parse(result);
+	 mydata = result;
 
 mydata.forEach(function(elementp) {
    var table = document.getElementById("tab2");
