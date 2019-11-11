@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+
+  <title>THIRM</title>
+</head>
+
+<style>
+  #chartdiv {
+    width: 100%;
+    height: 500px;
+  }
+</style>
+
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thirm.com">THIRM</a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
+
+        <a class="navbar-item"><span id="btcbalance"></span></a>
+        <a class="navbar-item"><span id="dashbalance"></span></a>
+        <a class="navbar-item"><span id="dogebalance"></span></a>
+        <a class="navbar-item"><span id="ltcbalance"></span></a>
+        <a class="navbar-item"><span id="nanobalance"></span></a>
+        <a class="navbar-item"><span id="xrpbalance"></span></a>
+        <a class="navbar-item"><span id="zecbalance"></span></a>
+        <a class="navbar-item"><span id="ethbalance"></span></a>
+                <a class="navbar-item"><span id="bchbalance"></span></a>
+                <a class="navbar-item"><span id="usdtbalance"></span></a>
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="button is-danger" onclick="logout()">
+              <strong>LOG OUT</strong>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <br>
+
+
+
+
+
+
+
+
+
+
+  <div class="columns">
+    <div class="column">
+
+      <div class="box">
+        <div class="field has-addons">
+          <p class="control">
+            <span class="select">
+              <select id="depositcoin">
+                <option>btc</option>
+                <option>dash</option>
+                <option>doge</option>
+                <option>ltc</option>
+                <option>nano</option>
+                <option>nmc</option>
+                <option>xrp</option>
+                <option>zec</option>
+                <option>eth</option>
+              </select>
+            </span>
+          </p>
+          <p class="control is-expanded"> <input class="input" type="text" placeholder="Click to generate" id="depositspan"> </p>
+          <p class="control"> <a onclick=deposit() class="button">Get Deposit Address </a> </p>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="column">
+
+      <div class="box">
+        <div class="field has-addons">
+          <p class="control">
+            <span class="select">
+              <select id="pcoin">
+                <option>btc</option>
+                <option>dash</option>
+                <option>doge</option>
+                <option>ltc</option>
+                <option>nano</option>
+                <option>nmc</option>
+                <option>xrp</option>
+                <option>zec</option>
+                <option>eth</option>
+              </select>
+            </span>
+          </p>
+          <p class="control is-expanded">
+            <input class="input" type="text" placeholder="Enter Address" id="paddress">
+          </p>
+          <p class="control is-expanded">
+            <input class="input" type="number" placeholder="Enter Amount" id="pamount">
+          </p>
+          <p class="control">
+            <a onclick=withdraw() class="button">
+              Withdraw
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <div class="columns">
+    <div class="column is-8">
+      <div class="box">
+        <div id="chartdiv"></div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="box">
+
+        <div class="content">
+          <div class="field">
+            <label class="label"> <span class="coin1"></span> Amount</label>
+            <div class="control">
+              <input class="input is-small" type="text" placeholder="Enter Amount" id="boonk1" onchange="pingdom(2)">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Cost</label>
+            <div class="control">
+              <input class="input is-small" type="text" placeholder="Enter Amount" id="pingdom">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label"> <span class="coin2"></span> Amount</label>
+            <div class="control">
+              <input class="input is-small" type="text" placeholder="Enter Amount" id="boonk2" onchange="pingdom(1)">
+            </div>
+          </div>
+
+          <div class="field is-grouped">
+            <div class="control">
+              <button class="button is-primary is-inverted is-small" onclick=create(2)>BUY_ <span class="coin2"></span></button>
+            </div>
+            <div class="control">
+              <button class="button is-danger is-inverted is-small" onclick=create(1)>SELL_ <span class="coin2"></span></button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="box">
+
+        <table id="myTablemy" class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">have</th>
+              <th scope="col">want</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+        </table>
+
+      </div>
+
+
+    </div>
+  </div>
+
+
+
+
+
+  <div class="columns">
+    <div class="column">
+      <div class="box">
+        <table id="tab1" class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">have</th>
+              <th scope="col">want</th>
+              <th scope="col">Rate A/B</th>
+              <th scope="col">ACTION</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+    <div class="column">
+      <div class="box">
+        <table id="tab2" class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">have</th>
+              <th scope="col">want</th>
+              <th scope="col">Rate B/A</th>
+              <th scope="col">ACTION</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <div class="box">
+    <table id="myTable2" class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+      <thead>
+        <tr>
+          <th scope="col">time</th>
+          <th scope="col">id</th>
+          <th scope="col">have</th>
+          <th scope="col">want</th>
+          <th scope="col">Have Amount (A)</th>
+          <th scope="col">Rate A/B</th>
+          <th scope="col">Want Amount (B)</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+
+
+
+
+
+
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <a href="https://thirm.com/trade.html?coin1=btc&coin2=nano"> <button class="button is-small">BTC-NANO</button></a>
+        <a href="https://thirm.com/trade.html?coin1=btc&coin2=dash"> <button class="button is-small">BTC-DASH</button></a>
+        <a href="https://thirm.com/trade.html?coin1=btc&coin2=doge"> <button class="button is-small">BTC-DOGE</button></a>
+        <a href="https://thirm.com/trade.html?coin1=btc&coin2=ltc"> <button class="button is-small">BTC-LTC</button></a>
+        <a href="https://thirm.com/trade.html?coin1=btc&coin2=nmc"> <button class="button is-small">BTC-NMC</button></a>
+        <a href="https://thirm.com/trade.html?coin1=btc&coin2=xrp"> <button class="button is-small">BTC-XRP</button></a>
+        <a href="https://thirm.com/trade.html?coin1=btc&coin2=zec"> <button class="button is-small">BTC-ZEC</button></a>
+        <a href="https://thirm.com/trade.html?coin1=btc&coin2=eth"> <button class="button is-small">BTC-ETH</button></a>
+        <a href="https://thirm.com/trade.html?coin1=btc&coin2=usdt"> <button class="button is-small">BTC-USDT</button></a>
+        <a href="https://thirm.com/trade.html?coin1=btc&coin2=bch"> <button class="button is-small">BTC-BCH</button></a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script src="https://www.amcharts.com/lib/4/core.js"></script>
+  <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+  <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+  <script src="trade.js"></script>
+  <script src="chart-core.js"></script>
+
+</body>
+
+</html>

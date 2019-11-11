@@ -1,0 +1,107 @@
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+
+  <title>THIRM</title>
+</head>
+
+
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="https://thirm.com">
+      THIRM.COM
+    </a>
+
+  </div>
+</nav>
+
+
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">  Register/Login    </h1>
+      <h2 class="subtitle">
+        Genrate A Strong SHA-256 HASH.
+      </h2>
+    </div>
+  </div>
+</section>
+
+      <div class="box">
+	<div class="columns">
+	  <div class="column">
+		Username  :     <input id="hash1" type="text"  class="input" placeholder="Can be anything">
+	  </div>
+	  <div class="column">
+   	Password  : <input id="hash2" type="text"  class="input" placeholder="Can be anything">
+	  </div>
+		<div class="column">
+		Password 2 : <input id="hash3" type="text"  class="input" placeholder="Can be anything">
+		</div>
+	</div>
+
+
+	<div class="columns">
+	  <div class="column is-8">
+		<input id="sha256" class="input" placeholder="Genrated Hash will show here"></input>
+	  </div>
+		<div class="column">
+			<button class="button is-link " onclick=genrx()>Generate HASH</button>
+			<button class="button is-link " onclick=register()>Register HASH</button>
+		    <button class="button is-link " onclick=login()>Login To Trade</button>
+		</div>
+	</div>
+	</div>
+
+
+	<section class="hero is-primary">
+	  <div class="hero-body">
+	    <div class="container">
+	      <h1 class="title">  Support & Help  </h1>
+	      <h2 class="subtitle">
+	       Join The Discord For Support !
+	      </h2>
+	    </div>
+	  </div>
+	</section>
+<iframe src="https://discordapp.com/widget?id=638660122431717386&theme=dark" width=100% height="500" allowtransparency="true" frameborder="0"></iframe>
+
+
+
+
+	<footer class="footer">
+	  <div class="content has-text-centered">
+	    <p>
+	      <strong>THIRM</strong> is  <strong>Anonymous Trading Platform </strong> with 0% Trading Fees.<br>
+				We Charge 1$ Per Month as platform fees, same to all users.<br>
+	    </p>
+	  </div>
+	</footer>
+
+
+
+    <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/emn178/js-sha256/build/sha256.min.js"></script>
+	  <script>
+	   function genrx(){
+	     a = document.getElementById("hash1").value;
+	  	 b = document.getElementById("hash2").value;
+	  	 c = document.getElementById("hash3").value;
+
+	   	 document.getElementById("sha256").value = sha256(a + b + c);
+	   }
+
+	   function login(){
+	   	 var tempxxxxxxxxxxxxx = document.getElementById("sha256").value;
+	  	 localStorage.setItem("usertoken", tempxxxxxxxxxxxxx);
+		   window.location = "trade.html";
+	   }
+
+	 function register(){
+	   	 var tempxxxxxxxxxxxxx = document.getElementById("sha256").value;
+       window.location = "https://thirm.com/register.php?token="+tempxxxxxxxxxxxxx;
+	   }
+	  </script>
