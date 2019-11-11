@@ -47,7 +47,7 @@ function getSearchParams(k){
 
 $.ajax({
    type : "GET",
-   url : "https://thirm.com/api/account",
+   url : "https://api.thirm.com/account",
    beforeSend: function(xhr){xhr.setRequestHeader('token', usertoken);},
    success : function(result) {
 	 mydata = JSON.parse(result);
@@ -88,7 +88,7 @@ $.ajax({
 
 $.ajax({
    type : "GET",
-   url : "https://thirm.com/api/orderhistory?have="+ coin1 +"&want="+coin2,
+   url : "https://api.thirm.com/orderhistory?have="+ coin1 +"&want="+coin2,
    beforeSend: function(xhr){xhr.setRequestHeader('token', usertoken);},
    success : function(result) {
    mydata = JSON.parse(result);
@@ -118,7 +118,7 @@ mydata.forEach(function(elementp) {
 function ordercancel(inputnow){
 $.ajax({
    type : "GET",
-   url : "https://thirm.com/api/ordercancel?id="+ inputnow,
+   url : "https://api.thirm.com/ordercancel?id="+ inputnow,
    beforeSend: function(xhr){xhr.setRequestHeader('token', usertoken);},
    success : function(result) {
      console.log("sucess");
@@ -135,7 +135,7 @@ $.ajax({
 function take(inputnow){
 $.ajax({
    type : "GET",
-   url : "https://thirm.com/api/take?id="+ inputnow,
+   url : "https://api.thirm.com/take?id="+ inputnow,
    beforeSend: function(xhr){xhr.setRequestHeader('token', usertoken);},
    success : function(result) {
      console.log("sucess");
@@ -167,7 +167,7 @@ function create(input){
 
 $.ajax({
    type : "GET",
-   url : "https://thirm.com/api/create?have="+ inputnowhave + "&want=" + inputnowwant + "&haveamount=" + inputnowhaveamount +  "&wantamount=" + inputnowwantamount,
+   url : "https://api.thirm.com/create?have="+ inputnowhave + "&want=" + inputnowwant + "&haveamount=" + inputnowhaveamount +  "&wantamount=" + inputnowwantamount,
    beforeSend: function(xhr){xhr.setRequestHeader('token', usertoken);},
    success : function(result) {
      console.log("sucess");
@@ -188,7 +188,7 @@ ppamount = document.getElementById("pamount").value;
 
 $.ajax({
    type : "GET",
-   url : "https://thirm.com/api/withdraw?coin="+ ppcoin + "&address=" + ppaddress + "&amount=" + ppamount,
+   url : "https://api.thirm.com/withdraw?coin="+ ppcoin + "&address=" + ppaddress + "&amount=" + ppamount,
    beforeSend: function(xhr){xhr.setRequestHeader('token', usertoken);},
    success : function(result) {
      console.log("sucess");
@@ -208,7 +208,7 @@ function deposit(){
 ppdeposit = document.getElementById("depositcoin").value;
 $.ajax({
    type : "GET",
-   url : "https://thirm.com/api/deposit?coin="+ ppdeposit ,
+   url : "https://api.thirm.com/deposit?coin="+ ppdeposit ,
    beforeSend: function(xhr){xhr.setRequestHeader('token', usertoken);},
    success : function(result) {
      console.log("sucess");
@@ -224,7 +224,7 @@ $.ajax({
 
 $.ajax({
    type : "GET",
-   url : "https://thirm.com/api/orderbook?orderby=0&have="+coin1+"&want="+coin2,
+   url : "https://api.thirm.com/orderbook?orderby=0&have="+coin1+"&want="+coin2,
    beforeSend: function(xhr){xhr.setRequestHeader('token', usertoken);},
    success : function(result) {
    mydata = JSON.parse(result);
@@ -250,7 +250,7 @@ mydata.forEach(function(elementp) {
 
 $.ajax({
    type : "GET",
-   url : "https://thirm.com/api/orderbook?orderby=1&have="+coin2+"&want="+coin1,
+   url : "https://api.thirm.com/orderbook?orderby=1&have="+coin2+"&want="+coin1,
    beforeSend: function(xhr){xhr.setRequestHeader('token', usertoken);},
    success : function(result) {
 	 mydata = JSON.parse(result);
