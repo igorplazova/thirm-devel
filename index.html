@@ -94,14 +94,28 @@
 	   	 document.getElementById("sha256").value = sha256(a + b + c);
 	   }
 
+		  
+		  
 	   function login(){
-	   	 var tempxxxxxxxxxxxxx = document.getElementById("sha256").value;
-	  	 localStorage.setItem("usertoken", tempxxxxxxxxxxxxx);
-		   window.location = "trade.html";
-	   }
+var tempxxxxxxxxxxxxx = document.getElementById("sha256").value;
+		   		   
+$.ajax({
+   type : "GET",
+   url : "https://api.thirm.com/index?tokenregister="+ tempxxxxxxxxxxxxx,
+   beforeSend: function(xhr){xhr.setRequestHeader('token', tempxxxxxxxxxxxxx);},
+   success : function(result) {
 
-	 function register(){
-	   	 var tempxxxxxxxxxxxxx = document.getElementById("sha256").value;
-                 window.location = "https://api.thirm.com/index?tokenregister="+tempxxxxxxxxxxxxx;
-	   }
-	  </script>
+if (mydata.token == null){
+window.location = "https://api.thirm.com/index?tokenregister="+tempxxxxxxxxxxxxx;    
+}else{
+localStorage.setItem("usertoken", tempxxxxxxxxxxxxx);
+window.location = "trade.html";
+}	   
+   },
+
+error : function(result) { alert("Something went Wrong, Make sure you are not blocking any requesta !! "); }	
+ });
+		   
+ }
+
+</script>
