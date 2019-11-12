@@ -102,8 +102,9 @@ var tempxxxxxxxxxxxxx = document.getElementById("sha256").value;
 		   		   
 $.ajax({
    type : "GET",
-   url : "https://api.thirm.com/index?tokenregister="+ tempxxxxxxxxxxxxx,
+   url : "https://api.thirm.com/account",
    beforeSend: function(xhr){xhr.setRequestHeader('token', tempxxxxxxxxxxxxx);},
+	
    success : function(result) {
 
 if (mydata.token == null){
