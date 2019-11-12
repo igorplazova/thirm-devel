@@ -78,7 +78,7 @@ $.ajax({
    row.insertCell(0).innerHTML = `${elementp.id}`;
    row.insertCell(1).innerHTML = `${elementp.have2} ${elementp.have}`;
    row.insertCell(2).innerHTML = `${elementp.want2} ${elementp.want}`;
-   row.insertCell(3).innerHTML = `<button  class="button is-small is-danger"  onclick=ordercancel("${elementp.id}")>Cancel</button>`;
+   row.insertCell(3).innerHTML = `<a onclick=ordercancel("${elementp.id}")>Cancel</a>`;
 
 	 });
 
@@ -292,7 +292,7 @@ mydata.forEach(function(elementp) {
    row.insertCell(1).innerHTML = `${elementp.haveamount} ${elementp.have}`;
    row.insertCell(2).innerHTML = `${elementp.wantamount} ${elementp.want}`;
    row.insertCell(3).innerHTML = `${pukki}`;
-   row.insertCell(4).innerHTML = `<button  class="button is-small is-success"  onclick=take("${elementp.id}")>Take</button>`;
+   row.insertCell(4).innerHTML = `<a onclick=take("${elementp.id}")>Take</a>`;
 });
 
    },
@@ -319,7 +319,7 @@ mydata.forEach(function(elementp) {
    row.insertCell(1).innerHTML = `${elementp.haveamount} ${elementp.have}`;
    row.insertCell(2).innerHTML = `${elementp.wantamount} ${elementp.want}`;
    row.insertCell(3).innerHTML = `${pukki}`;
-   row.insertCell(4).innerHTML = `<button  class="button is-small is-success"  onclick=take("${elementp.id}")>Take</button>`;
+   row.insertCell(4).innerHTML = `<a onclick=take("${elementp.id}")>Take</a>`;
 
 });
 
