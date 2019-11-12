@@ -50,7 +50,7 @@
 	  </div>
 		<div class="column">
 			<button class="button is-primary is-outlined" onclick=genrx()>Generate HASH</button>
-			<button id="loginbutton" class="button is-primary is-inverted " onclick=login() disabled>Access Trading Panel</button>
+			<button id="loginbutton" class="button is-primary " onclick=login() disabled>Access Trading Panel</button>
 		</div>
 	</div>
 	</div>
@@ -91,7 +91,7 @@
 	  	 c = document.getElementById("hash3").value;
 
 	   	 document.getElementById("sha256").value = sha256(a + b + c);  
-		 $('.loginbutton').prop("disabled", false); 
+		 $('#loginbutton').prop("disabled", false); 
 
 	   }
 
