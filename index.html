@@ -49,9 +49,8 @@
 		<input id="sha256" class="input" placeholder="Genrated Hash will show here"></input>
 	  </div>
 		<div class="column">
-			<button class="button is-link is-info" onclick=genrx()>Generate HASH</button>
-			<button class="button is-link " onclick=register()>Register HASH</button>
-		    <button class="button is-link " onclick=login()>Login To Trade</button>
+			<button class="button is-primary is-outlined" onclick=genrx()>Generate HASH</button>
+			<button id="loginbutton" class="button is-primary is-inverted " onclick=login() disabled>Access Trading Panel</button>
 		</div>
 	</div>
 	</div>
@@ -91,7 +90,9 @@
 	  	 b = document.getElementById("hash2").value;
 	  	 c = document.getElementById("hash3").value;
 
-	   	 document.getElementById("sha256").value = sha256(a + b + c);
+	   	 document.getElementById("sha256").value = sha256(a + b + c);  
+		 $('.loginbutton').prop("disabled", false); 
+
 	   }
 
 		  
