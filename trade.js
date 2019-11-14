@@ -138,7 +138,7 @@ result.forEach(function(elementp) {
    var pukki = elementp.base_volume/elementp.quote_volume;
        pukki = pukki.toFixed(8);
 	   
-   row.insertCell(0).innerHTML = `${elementp.trade_timestamp}`;
+   row.insertCell(0).innerHTML = `<span class="timeago" title="${elementp.trade_timestamp}">${elementp.trade_timestamp}</span> `;
    row.insertCell(1).innerHTML = `${elementp.tradeID}`;
    row.insertCell(2).innerHTML = `${elementp.base_volume}`;
    row.insertCell(3).innerHTML = `${elementp.quote_volume}`;
@@ -295,7 +295,7 @@ console.log(elementp);
    row.insertCell(1).innerHTML = `${elementp[1]}`;
    row.insertCell(2).innerHTML = `${elementp[2]}`;
    row.insertCell(3).innerHTML = `${pukki}`;
-   row.insertCell(4).innerHTML = `<a onclick=take("${elementp[0]}")>Take</a>`;
+   row.insertCell(4).innerHTML = `<a onclick=take("${elementp[0]}")>take</a>`;
 
 });
 
@@ -311,7 +311,7 @@ console.log(elementp);
    row.insertCell(1).innerHTML = `${elementp[1]}`;
    row.insertCell(2).innerHTML = `${elementp[2]}`;
    row.insertCell(3).innerHTML = `${pukki}`;
-   row.insertCell(4).innerHTML = `<a onclick=take("${elementp[0]}")>Take</a>`;
+   row.insertCell(4).innerHTML = `<a onclick=take("${elementp[0]}")>take</a>`;
 
 });
 
