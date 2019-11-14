@@ -113,25 +113,37 @@ $.ajax({
  });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 $.ajax({
    type : "GET",
-   url : "https://api.thirm.com/orderhistory?have="+ coin1 +"&want="+coin2,
-   beforeSend: function(xhr){xhr.setRequestHeader('token', usertoken);},
+   url : "https://api.thirm.com/public/trades?id="+ coin1 +"_"+coin2,
    success : function(result) {
-   mydata = result;
+  
 
-mydata.forEach(function(elementp) {
+result.forEach(function(elementp) {
    var table = document.getElementById("myTable2");
    var row = table.insertRow(-1);
-   var pukki = elementp.haveamount/elementp.wantamount;
-
-   row.insertCell(0).innerHTML = `${elementp.time}`;
-   row.insertCell(1).innerHTML = `${elementp.id}`;
-   row.insertCell(2).innerHTML = `${elementp.have}`;
-   row.insertCell(3).innerHTML = `${elementp.want}`;
-   row.insertCell(4).innerHTML = `${elementp.haveamount}`;
-   row.insertCell(5).innerHTML = `${pukki}`;
-   row.insertCell(6).innerHTML = `${elementp.wantamount}`;
+   var pukki = elementp.base_volume/elementp.quote_volume;
+       pukki = pukki.toFixed(8);
+	   
+   row.insertCell(0).innerHTML = `${elementp.trade_timestamp}`;
+   row.insertCell(1).innerHTML = `${elementp.tradeID}`;
+   row.insertCell(2).innerHTML = `${elementp.base_volume}`;
+   row.insertCell(3).innerHTML = `${elementp.quote_volume}`;
+   row.insertCell(4).innerHTML = `${pukki}`;
+   row.insertCell(5).innerHTML = `${elementp.type}`;
 });
    },
    error : function(result) {
@@ -140,33 +152,21 @@ mydata.forEach(function(elementp) {
  });
 
 
- $.ajax({
-    type : "GET",
-    url : "https://api.thirm.com/orderhistory?have="+ coin2 +"&want="+coin1,
-    beforeSend: function(xhr){xhr.setRequestHeader('token', usertoken);},
-    success : function(result) {
-    mydata = result;
 
 
 
- mydata.forEach(function(elementp) {
-    var table = document.getElementById("myTable22");
-    var row = table.insertRow(-1);
-    var pukki = elementp.wantamount/elementp.haveamount;
 
-    row.insertCell(0).innerHTML = `${elementp.time}`;
-    row.insertCell(1).innerHTML = `${elementp.id}`;
-    row.insertCell(2).innerHTML = `${elementp.have}`;
-    row.insertCell(3).innerHTML = `${elementp.want}`;
-    row.insertCell(4).innerHTML = `${elementp.haveamount}`;
-    row.insertCell(5).innerHTML = `${pukki}`;
-    row.insertCell(6).innerHTML = `${elementp.wantamount}`;
- });
-    },
-    error : function(result) {
-     location.reload(true);
-    }
-  });
+
+
+
+
+
+
+
+
+
+
+
 
 
 function ordercancel(inputnow){
@@ -278,48 +278,40 @@ $.ajax({
 
 $.ajax({
    type : "GET",
-   url : "https://api.thirm.com/orderbook?orderby=0&have="+coin1+"&want="+coin2,
-   beforeSend: function(xhr){xhr.setRequestHeader('token', usertoken);},
+   url : "https://api.thirm.com/public/orderbook2?id="+coin1+"_"+coin2,
    success : function(result) {
-   mydata = result;
+   ask = result.asks;
+   bid = result.bids; 
+   
+ask.forEach(function(elementp) {
+console.log(elementp);
 
-mydata.forEach(function(elementp) {
    var table = document.getElementById("tab1");
    var row = table.insertRow(-1);
-   var pukki = elementp.haveamount/elementp.wantamount;
-
-   row.insertCell(0).innerHTML = `${elementp.id}`;
-   row.insertCell(1).innerHTML = `${elementp.haveamount} ${elementp.have}`;
-   row.insertCell(2).innerHTML = `${elementp.wantamount} ${elementp.want}`;
+   var pukki = elementp[1]/elementp[2];
+   pukki = pukki.toFixed(8);
+   
+   row.insertCell(0).innerHTML = `${elementp[0]}`;
+   row.insertCell(1).innerHTML = `${elementp[1]}`;
+   row.insertCell(2).innerHTML = `${elementp[2]}`;
    row.insertCell(3).innerHTML = `${pukki}`;
-   row.insertCell(4).innerHTML = `<a onclick=take("${elementp.id}")>Take</a>`;
+   row.insertCell(4).innerHTML = `<a onclick=take("${elementp[0]}")>Take</a>`;
+
 });
 
-   },
-   error : function(result) {
-    location.reload(true);
-   }
- });
+bid.forEach(function(elementp) {
+console.log(elementp);
 
-
-$.ajax({
-   type : "GET",
-   url : "https://api.thirm.com/orderbook?orderby=1&have="+coin2+"&want="+coin1,
-   beforeSend: function(xhr){xhr.setRequestHeader('token', usertoken);},
-   success : function(result) {
-	 mydata = result;
-
-mydata.forEach(function(elementp) {
    var table = document.getElementById("tab2");
    var row = table.insertRow(-1);
-   var pukki = elementp.wantamount/elementp.haveamount;
-       pukki = pukki.toFixed(8);
-
-   row.insertCell(0).innerHTML = `${elementp.id}`;
-   row.insertCell(1).innerHTML = `${elementp.haveamount} ${elementp.have}`;
-   row.insertCell(2).innerHTML = `${elementp.wantamount} ${elementp.want}`;
+   var pukki = elementp[1]/elementp[2];
+   pukki = pukki.toFixed(8);
+   
+   row.insertCell(0).innerHTML = `${elementp[0]}`;
+   row.insertCell(1).innerHTML = `${elementp[1]}`;
+   row.insertCell(2).innerHTML = `${elementp[2]}`;
    row.insertCell(3).innerHTML = `${pukki}`;
-   row.insertCell(4).innerHTML = `<a onclick=take("${elementp.id}")>Take</a>`;
+   row.insertCell(4).innerHTML = `<a onclick=take("${elementp[0]}")>Take</a>`;
 
 });
 
@@ -328,3 +320,5 @@ mydata.forEach(function(elementp) {
     location.reload(true);
    }
  });
+
+
