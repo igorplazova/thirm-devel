@@ -1,5 +1,5 @@
 usertoken =  localStorage.getItem("usertoken");
-if (usertoken == null) { window.location = "https://thirm.com"; }
+// if (usertoken == null) { window.location = "https://thirm.com"; }
 
 coin1 = getSearchParams("coin1");
 if (coin1 == null) { coin1 = "btc"; }
