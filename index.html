@@ -148,7 +148,7 @@ table {
           <th scope="col">Type</th>
         </tr>
         <tr v-for="record in trade_history" v-bind:key="record.tradeID">
-          <td>{{record.trade_timestamp}}</td>
+          <td>{{record.trade_timestamp | timeago }}</td>
           <td>{{record.tradeID}}</td>
           <td>{{record.base_volume}}</td>
           <td>{{record.quote_volume}}</td>
@@ -178,7 +178,8 @@ table {
   </div>
   <script src="axios.min.js"></script>
   <script src="vue.js"></script>
-  <script src="vueapp.js"></script>
+  <script src="./vueapp/global-filters.js"></script>
+  <script src="./vueapp/main.js"></script>
  
 </body>
 
