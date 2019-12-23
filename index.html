@@ -1,8 +1,11 @@
+<!doctype html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+
 
 	<!-- Primary Meta Tags -->
 <title>THIRM - Anonymous Fee-less Crypto Exchange</title>
@@ -24,121 +27,159 @@
 <meta property="twitter:image" content="">
 	
 	
-	
   <title>THIRM</title>
 </head>
 
+<style>
+table {
+  font-size: 75%;
+}
+</style>
 
-
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="https://thirm.com">
-      THIRM.COM
-    </a>
-
-  </div>
-</nav>
-
-
-<section class="hero is-info">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title">  Register/Login    </h1>
-      <h2 class="subtitle">
-        Genrate A Strong SHA-256 HASH.
-      </h2>
+<body>
+  <div id="trade-app">
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thirm.com">THIRM</a>
     </div>
-  </div>
-</section>
+
+    <div id="trade-app-navbar" class="navbar-menu">
+      <div class="navbar-start">
+
+        <a v-for="c in coins"
+        v-bind:key="c.symbol"
+        class="navbar-item"><span v-bind:id="c.symbol+'balance'">{{c.symbol}}</span></a>
+        
+      </div>
+      <a v-for="c in altcoins" v-bind:key="c.symbol" v-bind:href="'?coin1=btc&coint2='+c.symbol"><button class="button is-small is-uppercase">BTC-{{c.symbol}}</button></a>
+	      
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="button is-danger" onclick="logout()">
+              <strong>LOG OUT</strong>
+            </a>
+          </div>
+        </div>
+          <div class="navbar-item">
+          <div class="buttons">
+            <a class="button is-success" target=_blank href="https://github.com/therealmoney/thirm">
+              <strong>GITHUB</strong>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </nav>
+  <br>
+
+
+  <div class="columns">
+    <div class="column">
 
       <div class="box">
-	<div class="columns">
-	  <div class="column">
-		Username  :     <input id="hash1" type="text"  class="input" placeholder="Can be anything">
-	  </div>
-	  <div class="column">
-   	Password  : <input id="hash2" type="text"  class="input" placeholder="Can be anything">
-	  </div>
-		<div class="column">
-		Password 2 : <input id="hash3" type="text"  class="input" placeholder="Can be anything">
-		</div>
-	</div>
+        <div class="field has-addons">
+          <p class="control">
+            <span class="select">
+              <select id="depositcoin">
+                <option v-for="c in coins"
+                v-bind:key="c.symbol">{{c.symbol}}</option>
+              </select>
+            </span>
+          </p>
+          <p class="control is-expanded"> <input class="input" type="text" placeholder="Click to generate" id="depositspan"> </p>
+          <p class="control"> <a onclick=deposit() class="button">Get Deposit Address </a> </p>
+        </div>
+      </div>
 
 
-	<div class="columns">
-	  <div class="column is-8">
-		<input id="sha256" class="input" placeholder="Genrated Hash will show here"></input>
-	  </div>
-		<div class="column">
-			<button class="button is-primary is-outlined" onclick=genrx()>Generate HASH</button>
-			<button id="loginbutton" class="button is-primary " onclick=login() disabled>Access Trading Panel</button>
-		</div>
-	</div>
-	</div>
+    </div>
+    <div class="column">
 
-
-	<section class="hero is-primary">
-	  <div class="hero-body">
-	    <div class="container">
-	      <h1 class="title">  Support & Help  </h1>
-	      <h2 class="subtitle">
-	       Join The Discord For Support !
-	      </h2>
-	    </div>
-	  </div>
-	</section>
-<iframe src="https://discordapp.com/widget?id=638660122431717386&theme=dark" width=100% height="500" allowtransparency="true" frameborder="0"></iframe>
-
-
-
-
-	<footer class="footer">
-	  <div class="content has-text-centered">
-	    <p>
-	      <strong>THIRM</strong> is  <strong>Anonymous Trading Platform </strong> with 0% Trading Fees.<br>
-				We Charge 1$ Per Month as platform fees, same to all users.<br>
-	    </p>
-	  </div>
-	</footer>
+      <div class="box">
+        <div class="field has-addons">
+          <p class="control">
+            <span class="select">
+              <select id="pcoin">
+                <option v-for="c in coins"
+                v-bind:key="c.symbol">{{c.symbol}}</option>
+              </select>
+            </span>
+          </p>
+          <p class="control is-expanded">
+            <input class="input" type="text" placeholder="Enter Address" id="paddress">
+          </p>
+          <p class="control is-expanded">
+            <input class="input" type="number" placeholder="Enter Amount" id="pamount">
+          </p>
+          <p class="control">
+            <a onclick=withdraw() class="button">
+              Withdraw
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
-    <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/emn178/js-sha256/build/sha256.min.js"></script>
-	  <script>
-	   function genrx(){
-	     a = document.getElementById("hash1").value;
-	  	 b = document.getElementById("hash2").value;
-	  	 c = document.getElementById("hash3").value;
-
-	   	 document.getElementById("sha256").value = sha256(a + b + c);  
-		 $('#loginbutton').prop("disabled", false); 
-
-	   }
-
-		  
-		  
-	   function login(){
-var tempxxxxxxxxxxxxx = document.getElementById("sha256").value;
-		   		   
-$.ajax({
-   type : "GET",
-   url : "https://api.thirm.com/account",
-   beforeSend: function(xhr){xhr.setRequestHeader('token', tempxxxxxxxxxxxxx);},
+  <div class="columns">
+    <div class="column">
 	
-   success : function(result) {
+	 <div class="box">
+        <div id="chartdiv" style="height: 400px;"></div>
+	</div>
+	
+		</div>
+		
+	    <div class="column">
+	    <div class="box">
+    TRADE HISTORY
+    <table id="trade-history-table" class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+      <thead>
+        <tr>
+          <th scope="col">Time</th>
+          <th scope="col">ID</th>
+          <th scope="col"><span class="coin1"></span></th>
+          <th scope="col"><span class="coin2"></span></th>
+		  <th scope="col">Rate</th>
+          <th scope="col">Type</th>
+        </tr>
+        <tr v-for="record in trade_history" v-bind:key="record.tradeID">
+          <td>{{record.trade_timestamp}}</td>
+          <td>{{record.tradeID}}</td>
+          <td>{{record.base_volume}}</td>
+          <td>{{record.quote_volume}}</td>
+          <td>{{record.price}}</td>
+          <td>{{record.type}}</td>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  
+  	</div>
+	</div>
+  
+  
 
-if (result.token == null){
-window.location = "https://api.thirm.com/index?tokenregister="+tempxxxxxxxxxxxxx;    
-}else{
-localStorage.setItem("usertoken", tempxxxxxxxxxxxxx);
-window.location = "trade.html";
-}	   
-   },
 
-error : function(result) { alert("Something went Wrong, Make sure you are not blocking any requesta !! "); }	
- });
-		   
- }
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+          <a v-for="c in altcoins" v-bind:key="c.symbol" v-bind:href="'?coin1=btc&coint2='+c.symbol"><button class="button is-small is-uppercase">BTC-{{c.symbol}}</button></a>
+	      	
+      </p>
+    </div>
+  </footer>
 
-</script>
+  
+  </div>
+  <script src="axios.min.js"></script>
+  <script src="vue.js"></script>
+  <script src="vueapp.js"></script>
+ 
+</body>
+
+</html>
