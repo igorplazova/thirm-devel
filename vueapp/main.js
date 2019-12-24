@@ -109,13 +109,13 @@ function updateOrderBook(){
         var order_book = response.data;
         var bidssum=0;
         for (var i=0;i<order_book.bids.length;i++){
-            bidssum+=order_book.bids[i][1];
+            bidssum+=order_book.bids[i][0];
             order_book.bids[i][2] = bidssum;
         }
 
         var askssum=0;
         for (var i=0;i<order_book.asks.length;i++){
-            askssum+=order_book.asks[i][1];
+            askssum+=order_book.asks[i][0];
             order_book.asks[i][2] = askssum;
         }
         this.order_book = order_book;
