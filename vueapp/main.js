@@ -1,12 +1,13 @@
 
 
 
-new Vue({
+var tradeApp = new Vue({
     el: '#trade-app',
     data() {
         var data = {
             last_trade: {},
             trade_history: [],
+            order_book:[],
             wifKey: '',
             isLoginActive: null,
             orderType: 'sell'
@@ -27,6 +28,7 @@ new Vue({
     methods: {
         showLogin: showLogin,
         login: login,
+        logout:logout,
         closeLogin: closeLogin,
         makeMarketOrder: makeMarketOrder,
         updateTradesHistory:updateTradesHistory,
@@ -43,6 +45,11 @@ function login(event) {
     //TODO check the key
     console.log(this.wifKey);
     this.closeLogin();
+}
+
+
+function logout(event) {
+    this.wifKey = null;
 }
 
 function closeLogin() {
@@ -96,7 +103,23 @@ function updateTradesHistory() {
 }
 
 function updateOrderBook(){
-    //TODO
+    axios
+    .get("https://api1.thirm.com/public/orderbook/" + this.coin1 + "_" + this.coin2)
+    .then(response => {
+        var order_book = response.data;
+        var bidssum=0;
+        for (var i=0;i<order_book.bids.length;i++){
+            bidssum+=order_book.bids[i][1];
+            order_book.bids[i][2] = bidssum;
+        }
+
+        var askssum=0;
+        for (var i=0;i<order_book.asks.length;i++){
+            askssum+=order_book.asks[i][1];
+            order_book.asks[i][2] = askssum;
+        }
+        this.order_book = order_book;
+    })
 }
 
 function getUrlParameter(ParamName) {
