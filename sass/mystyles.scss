@@ -4,12 +4,15 @@
 $text: hsl(0,0%,100%);
 $scheme-main: hsl(0,0%,4%);
 $body-background-color: $scheme-main;
+$link-active:$text;
 
 $panel-heading-background-color: $scheme-main;
 $panel-heading-color: $text;
 $text-strong: $text;
 $table-background-color:$scheme-main;
-$link-hover:orange;
+
+$orange:orange;
+$link-hover:$orange;
 
 
 @import "../node_modules/bulma/bulma.sass";
@@ -17,7 +20,7 @@ $link-hover:orange;
 
 
 
-$panel-border:1px solid $white;
+$panel-border:1px solid $grey;
 
 .panel{
     border: $panel-border;
@@ -28,4 +31,11 @@ $panel-border:1px solid $white;
 
 #trade-app{
     padding: 15px;
+}
+
+.login-modal{
+
+    .modal-card-head, .modal-card-body{
+        background-color: $orange;
+    }
 }

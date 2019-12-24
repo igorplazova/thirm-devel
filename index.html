@@ -51,8 +51,16 @@
                     <a v-bind:href="'?coin1=btc&coin2='+c.symbol"><button
                             class="button is-small is-uppercase">BTC-{{c.symbol}}</button></a>
                 </div>
-               
 
+
+            </div>
+            <div class="level-left">
+                <div class="level-item has-text-centered">
+                    <button class="button is-success" v-on:click="showLogin">
+                        Login
+                    </button>
+
+                </div>
             </div>
 
 
@@ -90,7 +98,7 @@
 
         <div class="columns">
 
-            <div class="column is-three-fifths-widescreen is-half-desktop">
+            <div class="column is-half">
                 <div class="panel order-book">
                     <p class="panel-heading">Order Book</p>
 
@@ -136,7 +144,7 @@
 
 
             <div class="column is-narrow">
-                <div class="" style="width: 200px;">
+                <div class="" style="width: 300px;">
                     <div class="panel sidebar">
                         <p class="panel-tabs">
                             <a class="is-active">SELL</a>
@@ -154,13 +162,33 @@
 
 
 
+        <div class="modal login-modal" v-bind:class="{ 'is-active': isLoginActive }">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Modal title</p>
+                    <button class="delete" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input is-primary" type="text" v-model="wifKey" placeholder="Enter your WIF key">
+                        </div>
+                    </div>
+                </section>
+                <footer class="modal-card-foot">
+                    <button class="button is-danger" v-on:click="login">Login</button>
+                    <button class="button is-white">Proceed without login</button>
+                </footer>
+            </div>
+        </div>
 
 
     </div>
     <script src="axios.min.js"></script>
     <script src="vue.js"></script>
     <script src="vue-router.js"></script>
-    
+
     <script src="./vueapp/global-filters.js"></script>
     <script src="./vueapp/main.js"></script>
 

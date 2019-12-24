@@ -1191,7 +1191,7 @@ a.box:active {
       box-shadow: 0 0 0 0.125em rgba(50, 115, 220, 0.25); }
   .button:active, .button.is-active {
     border-color: #4a4a4a;
-    color: #363636; }
+    color: white; }
   .button.is-text {
     background-color: transparent;
     border-color: transparent;
@@ -5238,7 +5238,7 @@ a.navbar-item,
     padding: 0.5em; }
     .panel-tabs a.is-active {
       border-bottom-color: #4a4a4a;
-      color: #363636; }
+      color: white; }
 
 .panel-list a {
   color: white; }
@@ -5261,7 +5261,7 @@ a.navbar-item,
     flex-wrap: wrap; }
   .panel-block.is-active {
     border-left-color: #3273dc;
-    color: #363636; }
+    color: white; }
     .panel-block.is-active .panel-icon {
       color: #3273dc; }
   .panel-block:last-child {
@@ -7102,10 +7102,13 @@ label.panel-block {
   padding: 3rem 1.5rem 6rem; }
 
 .panel {
-  border: 1px solid white; }
+  border: 1px solid #7a7a7a; }
 
-.panel-block {
-  border-top: 1px solid white; }
+.panel-heading {
+  border-bottom: 1px solid #7a7a7a; }
 
 #trade-app {
   padding: 15px; }
+
+.login-modal .modal-card-head, .login-modal .modal-card-body {
+  background-color: orange; }

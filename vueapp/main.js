@@ -6,7 +6,9 @@ new Vue({
     data() {
         var data = {
             last_trade: {},
-            trade_history: []
+            trade_history: [],
+            wifKey:'',
+            isLoginActive:null
         };
         data.coins = [{ symbol: 'btc' }, { symbol: 'ltc' }, { symbol: 'usdt' }, { symbol: 'eth' }];
         data.altcoins = data.coins.filter((function (c) { return c.symbol != 'btc' }));
@@ -25,9 +27,23 @@ new Vue({
                     this.last_trade = this.trade_history[t_hist_len - 1];
                 }
             })
+    },
+    methods:{
+        showLogin:showLogin,
+        login:login
     }
 });
 
+
+function showLogin(event){
+    this.isLoginActive = true;
+}
+
+function login(event){
+    //TODO check the key
+    console.log(this.wifKey);
+    this.isLoginActive=false;
+}
 
 
 function getUrlParameter(ParamName) {
