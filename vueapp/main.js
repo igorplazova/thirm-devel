@@ -19,13 +19,15 @@ new Vue({
         return data;
     },
     mounted() {
-        updateTradesHistory();
+        this.updateTradesHistory()
     },
     methods: {
         showLogin: showLogin,
         login: login,
         closeLogin: closeLogin,
-        makeMarketOrder: makeMarketOrder
+        makeMarketOrder: makeMarketOrder,
+        updateTradesHistory:updateTradesHistory,
+        updateOrderBook:updateOrderBook
     }
 });
 
@@ -73,12 +75,9 @@ function makeMarketOrder() {
     }).catch(function (error) {
         console.log(error);
     }).then(response => {
-        updateTradesHistory();
+        this.updateOrderBook();
     });
     
-
-
-
 }
 
 function updateTradesHistory() {
@@ -91,6 +90,10 @@ function updateTradesHistory() {
                 this.last_trade = this.trade_history[t_hist_len - 1];
             }
         })
+}
+
+function updateOrderBook(){
+    //TODO
 }
 
 function getUrlParameter(ParamName) {
