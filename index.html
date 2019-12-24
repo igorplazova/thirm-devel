@@ -115,10 +115,10 @@
                                             <th scope="col">Bids Sum</th>
                                             <th scope="col">Rate</th>
                                         </tr>
-                                        <tr v-for="b in order_book.bids" v-bind:key="b[0]">
-                                            <td>{{b[1] }}</td>
-                                            <td>{{b[2] }}</td>
-                                            <td>{{b[0] }}</td>
+                                        <tr v-for="b in order_book.bids" v-bind:key="b.index">
+                                            <td>{{b.bid}}</td>
+                                            <td>{{b.bidssum }}</td>
+                                            <td>{{b.price}}</td>
                                         </tr>
                                     </thead>
                                 </table>
@@ -131,10 +131,10 @@
                                             <th scope="col">Asks Sum</th>
                                             <th scope="col">Asks</th>
                                         </tr>
-                                        <tr v-for="a in order_book.asks" v-bind:key="a[0]">
-                                            <td>{{a[0] }}</td>
-                                            <td>{{a[2] }}</td>
-                                            <td>{{a[1] }}</td>
+                                        <tr v-for="a in order_book.asks" v-bind:key="a.index">
+                                            <td>{{a.price }}</td>
+                                            <td>{{a.askssum }}</td>
+                                            <td>{{a.ask }}</td>
                                         </tr>
                                     </thead>
                                 </table>

@@ -9,7 +9,10 @@ new Vue({
             trade_history: [],
             wifKey: '',
             isLoginActive: null,
-            orderType: 'sell'
+            orderType: 'sell',
+            order_book:[],
+            coin1Amount:null,
+            coin2Amount:null
         };
         data.coins = [{ symbol: 'btc' }, { symbol: 'ltc' }, { symbol: 'usdt' }, { symbol: 'eth' }];
         data.altcoins = data.coins.filter((function (c) { return c.symbol != 'btc' }));
@@ -27,6 +30,7 @@ new Vue({
     methods: {
         showLogin: showLogin,
         login: login,
+        logout:logout,
         closeLogin: closeLogin,
         makeMarketOrder: makeMarketOrder,
         updateTradesHistory:updateTradesHistory,
@@ -47,6 +51,10 @@ function login(event) {
 
 function closeLogin() {
     this.isLoginActive = false;
+}
+
+function logout(){
+    this.wifKey=null;
 }
 
 function makeMarketOrder() {
@@ -100,18 +108,26 @@ function updateOrderBook(){
     .get("https://api1.thirm.com/public/orderbook/" + this.coin1 + "_" + this.coin2)
     .then(response => {
         var order_book = response.data;
+        var bids = [];
+        var asks = [];
         var bidssum=0;
         for (var i=0;i<order_book.bids.length;i++){
-            bidssum+=order_book.bids[i][1];
-            order_book.bids[i][2] = bidssum;
+            var price = order_book.bids[i][0];
+            var bid = order_book.bids[i][1];
+            bidssum+=bid;
+            
+            bids.push({index:i, price:price, bid:bid, bidssum:bidssum});
         }
 
         var askssum=0;
         for (var i=0;i<order_book.asks.length;i++){
-            askssum+=order_book.asks[i][1];
-            order_book.asks[i][2] = askssum;
+            var price = order_book.asks[i][0];
+            var ask = order_book.asks[i][1];
+            askssum+=ask;
+            
+            asks.push({index:i, price:price, ask:ask, askssum:askssum});
         }
-        this.order_book = order_book;
+        this.order_book = {bids:bids,asks:asks}
     })
 }
 
