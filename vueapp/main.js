@@ -96,7 +96,23 @@ function updateTradesHistory() {
 }
 
 function updateOrderBook(){
-    //TODO
+    axios
+    .get("https://api1.thirm.com/public/orderbook/" + this.coin1 + "_" + this.coin2)
+    .then(response => {
+        var order_book = response.data;
+        var bidssum=0;
+        for (var i=0;i<order_book.bids.length;i++){
+            bidssum+=order_book.bids[i][1];
+            order_book.bids[i][2] = bidssum;
+        }
+
+        var askssum=0;
+        for (var i=0;i<order_book.asks.length;i++){
+            askssum+=order_book.asks[i][1];
+            order_book.asks[i][2] = askssum;
+        }
+        this.order_book = order_book;
+    })
 }
 
 function getUrlParameter(ParamName) {
