@@ -48,7 +48,7 @@
 
                 </div>
                 <div v-for="c in altcoins" v-bind:key="c.symbol" class="level-item has-text-centered">
-                    <a v-bind:href="'?coin1=btc&coint2='+c.symbol"><button
+                    <a v-bind:href="'?coin1=btc&coin2='+c.symbol"><button
                             class="button is-small is-uppercase">BTC-{{c.symbol}}</button></a>
                 </div>
                
@@ -159,6 +159,8 @@
     </div>
     <script src="axios.min.js"></script>
     <script src="vue.js"></script>
+    <script src="vue-router.js"></script>
+    
     <script src="./vueapp/global-filters.js"></script>
     <script src="./vueapp/main.js"></script>
 

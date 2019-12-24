@@ -10,8 +10,9 @@ new Vue({
         };
         data.coins = [{ symbol: 'btc' }, { symbol: 'ltc' }, { symbol: 'usdt' }, { symbol: 'eth' }];
         data.altcoins = data.coins.filter((function (c) { return c.symbol != 'btc' }));
-        data.coin1 = getSearchParams("coin1") || 'btc';
-        data.coin2 = getSearchParams("coin2") || 'eth';
+        
+        data.coin1 = getUrlParameter('coin1') || 'eth';
+        data.coin2 = getUrlParameter('coin2')  || 'btc';
         return data;
     },
     mounted() {
@@ -29,9 +30,9 @@ new Vue({
 
 
 
-
-function getSearchParams(k) {
-    var p = {};
-    location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (s, k, v) { p[k] = v })
-    return k ? p[k] : p;
-}
+function getUrlParameter(ParamName) {
+    name = ParamName.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(window.location.href);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};

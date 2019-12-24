@@ -22,8 +22,8 @@ $panel-border:1px solid $white;
 .panel{
     border: $panel-border;
 }
-.panel-block{
-    border-top: $panel-border;
+.panel-heading{
+    border-bottom: $panel-border;
 }
 
 #trade-app{
