@@ -7,44 +7,91 @@ new Vue({
         var data = {
             last_trade: {},
             trade_history: [],
-            wifKey:'',
-            isLoginActive:null
+            wifKey: '',
+            isLoginActive: null,
+            orderType: 'sell'
         };
         data.coins = [{ symbol: 'btc' }, { symbol: 'ltc' }, { symbol: 'usdt' }, { symbol: 'eth' }];
         data.altcoins = data.coins.filter((function (c) { return c.symbol != 'btc' }));
-        
+
         data.coin1 = getUrlParameter('coin1') || 'eth';
-        data.coin2 = getUrlParameter('coin2')  || 'btc';
+        data.coin2 = getUrlParameter('coin2') || 'btc';
         return data;
     },
     mounted() {
-        axios
-            .get("https://api1.thirm.com/public/trades/" + this.coin1 + "_" + this.coin2)
-            .then(response => {
-                this.trade_history = response.data;
-                var t_hist_len = this.trade_history.length
-                if (t_hist_len) {
-                    this.last_trade = this.trade_history[t_hist_len - 1];
-                }
-            })
+        updateTradesHistory();
     },
-    methods:{
-        showLogin:showLogin,
-        login:login
+    methods: {
+        showLogin: showLogin,
+        login: login,
+        closeLogin: closeLogin,
+        makeMarketOrder: makeMarketOrder
     }
 });
 
 
-function showLogin(event){
+function showLogin(event) {
     this.isLoginActive = true;
 }
 
-function login(event){
+function login(event) {
     //TODO check the key
     console.log(this.wifKey);
-    this.isLoginActive=false;
+    this.closeLogin();
 }
 
+function closeLogin() {
+    this.isLoginActive = false;
+}
+
+function makeMarketOrder() {
+    var have, haveAmount, want, wantAmount;
+
+    if (this.orderType == 'sell') {
+
+        have = this.coin1;
+        haveAmount = this.coin1Amount;
+        want = this.coin2;
+        wantAmount = this.coin2Amount;
+
+    } else {
+
+        have = this.coin2;
+        haveAmount = this.coin2Amount;
+        want = this.coin1;
+        wantAmount = this.coin1Amount;
+    }
+
+    var headers = {
+        'x-token': this.wifKey
+    }
+
+    axios({
+        'method': 'get',
+        url: "https://api1.thirm.com/make/" + [have, haveAmount, want, wantAmount].join('/'),
+        headers: headers
+    }).catch(function (error) {
+        console.log(error);
+    }).then(response => {
+        updateTradesHistory();
+    });
+    
+
+
+
+}
+
+function updateTradesHistory() {
+    axios
+        .get("https://api1.thirm.com/public/trades/" + this.coin1 + "_" + this.coin2)
+        .then(response => {
+            this.trade_history = response.data;
+            var t_hist_len = this.trade_history.length
+            if (t_hist_len) {
+                this.last_trade = this.trade_history[t_hist_len - 1];
+            }
+        })
+}
 
 function getUrlParameter(ParamName) {
     name = ParamName.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');

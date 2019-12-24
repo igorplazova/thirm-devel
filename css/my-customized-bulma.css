@@ -7112,3 +7112,11 @@ label.panel-block {
 
 .login-modal .modal-card-head, .login-modal .modal-card-body {
   background-color: orange; }
+
+.amount {
+  position: relative; }
+
+.amount .coin {
+  position: absolute;
+  right: 5px;
+  top: 8px; }

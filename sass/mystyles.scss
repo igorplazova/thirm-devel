@@ -39,3 +39,11 @@ $panel-border:1px solid $grey;
         background-color: $orange;
     }
 }
+.amount{
+    position: relative;
+}
+.amount .coin{
+    position: absolute;
+    right: 5px;
+    top: 8px;
+}
