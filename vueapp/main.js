@@ -19,7 +19,10 @@ new Vue({
         return data;
     },
     mounted() {
-        this.updateTradesHistory()
+        setInterval(this.updateTradesHistory,
+            3000);
+        setInterval(this.updateOrderBook,
+            3000);
     },
     methods: {
         showLogin: showLogin,
