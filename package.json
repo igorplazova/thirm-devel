@@ -1,0 +1,25 @@
+{
+  "name": "thirm",
+  "version": "0.1.0",
+  "description": "Frontend for crypto exchange with 0 % trading fees, bidding order book, anonymous trading, API access.",
+  "main": "none",
+  "scripts": {
+    "css-build": "node-sass --omit-source-map-url sass/mystyles.scss css/my-customized-bulma.css",
+    "css-watch": "npm run css-build -- --watch",
+    "start": "npm run css-watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/therealmoney/thirm.git"
+  },
+  "author": "https://reddit.com/user/fantasticoder",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/therealmoney/thirm/issues"
+  },
+  "homepage": "https://github.com/therealmoney/thirm#readme",
+  "devDependencies": {
+    "bulma": "^0.8.0",
+    "node-sass": "^4.13.0"
+  }
+}

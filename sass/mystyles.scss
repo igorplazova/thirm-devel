@@ -1,0 +1,31 @@
+@charset "utf-8";
+
+
+$text: hsl(0,0%,100%);
+$scheme-main: hsl(0,0%,4%);
+$body-background-color: $scheme-main;
+
+$panel-heading-background-color: $scheme-main;
+$panel-heading-color: $text;
+$text-strong: $text;
+$table-background-color:$scheme-main;
+$link-hover:orange;
+
+
+@import "../node_modules/bulma/bulma.sass";
+
+
+
+
+$panel-border:1px solid $white;
+
+.panel{
+    border: $panel-border;
+}
+.panel-block{
+    border-top: $panel-border;
+}
+
+#trade-app{
+    padding: 15px;
+}
