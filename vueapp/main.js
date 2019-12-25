@@ -1,7 +1,7 @@
 
 
 
-new Vue({
+var tradeApp = new Vue({
     el: '#trade-app',
     data() {
         var data = {
@@ -12,7 +12,8 @@ new Vue({
             orderType: 'sell',
             order_book:[],
             coin1Amount:null,
-            coin2Amount:null
+            coin2Amount:null,
+            depthChart:null
         };
         data.coins = [{ symbol: 'btc' }, { symbol: 'ltc' }, { symbol: 'usdt' }, { symbol: 'eth' }];
         data.altcoins = data.coins.filter((function (c) { return c.symbol != 'btc' }));
@@ -26,6 +27,7 @@ new Vue({
             3000);
         setInterval(this.updateOrderBook,
             3000);
+
     },
     methods: {
         showLogin: showLogin,
@@ -34,7 +36,8 @@ new Vue({
         closeLogin: closeLogin,
         makeMarketOrder: makeMarketOrder,
         updateTradesHistory:updateTradesHistory,
-        updateOrderBook:updateOrderBook
+        updateOrderBook:updateOrderBook,
+        updateDepthChart:updateDepthChart
     }
 });
 
@@ -128,6 +131,8 @@ function updateOrderBook(){
             asks.push({index:i, price:price, ask:ask, askssum:askssum});
         }
         this.order_book = {bids:bids,asks:asks}
+
+        this.updateDepthChart();
     })
 }
 

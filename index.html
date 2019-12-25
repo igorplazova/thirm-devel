@@ -100,61 +100,117 @@
         </nav>
 
         <div class="columns">
+            <div class="column depth-order-book-make-order-parent is-third-fifths">
+                <div class="columns is-multiline">
+                    <div class="column is-full depth-chart">
+                        <div class="panel">
+                            <p class="panel-heading">Depth Chart</p>
 
-            <div class="column is-half">
-                <div class="panel order-book">
-                    <p class="panel-heading">Order Book</p>
-
-                    <div class="panel-block">
-                        <div class="tile is-ancestor">
-                            <div class="tile">
-                                <table id="bids-table" class="table  is-narrow is-hoverable is-fullwidth">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Bids</th>
-                                            <th scope="col">Bids Sum</th>
-                                            <th scope="col">Rate</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="b in order_book.bids" v-bind:key="b.index">
-                                            <td>{{b.bid}}</td>
-                                            <td>{{b.bidssum }}</td>
-                                            <td>{{b.price | fixedpoint8}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="tile">
-                                <table id="asks-table" class="table  is-narrow is-hoverable is-fullwidth">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Rate</th>
-                                            <th scope="col">Asks Sum</th>
-                                            <th scope="col">Asks</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="a in order_book.asks" v-bind:key="a.index">
-                                            <td>{{a.price | fixedpoint8 }}</td>
-                                            <td>{{a.askssum }}</td>
-                                            <td>{{a.ask }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="panel-block">
+                                <div id="depth-chart"></div>
                             </div>
                         </div>
-                        <br />
                     </div>
+                    <div class="column order-book">
+                        <div class="panel">
+                            <p class="panel-heading">Order Book</p>
+
+                            <div class="panel-block">
+                                <div class="tile is-ancestor">
+                                    <div class="tile">
+                                        <table id="bids-table" class="table  is-narrow is-hoverable is-fullwidth">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Bids</th>
+                                                    <th scope="col">Bids Sum</th>
+                                                    <th scope="col">Rate</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="b in order_book.bids" v-bind:key="b.index">
+                                                    <td>{{b.bid}}</td>
+                                                    <td>{{b.bidssum }}</td>
+                                                    <td>{{b.price | fixedpoint8}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tile">
+                                        <table id="asks-table" class="table  is-narrow is-hoverable is-fullwidth">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Rate</th>
+                                                    <th scope="col">Asks Sum</th>
+                                                    <th scope="col">Asks</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="a in order_book.asks" v-bind:key="a.index">
+                                                    <td>{{a.price | fixedpoint8 }}</td>
+                                                    <td>{{a.askssum }}</td>
+                                                    <td>{{a.ask }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <br />
+                            </div>
 
 
 
 
+                        </div>
+
+                    </div>
+                    <div class="column is-narrow">
+                        <div class="" style="width: 300px;">
+                            <div class="panel sidebar">
+                                <p class="panel-tabs">
+                                    <a v-bind:class="{ 'is-active': orderType=='sell' }"
+                                        v-on:click="orderType='sell'">SELL</a>
+                                    <a v-bind:class="{ 'is-active': orderType=='buy' }"
+                                        v-on:click="orderType='buy'">BUY</a>
+                                </p>
+                                <div class="panel-block">
+                                    <div class="field">
+                                        <p class="control amount coin1">
+                                            <input class="input" type="text" v-model="coin1Amount" placeholder="0.00">
+                                            <span class="coin is-uppercase">
+                                                {{coin1}}
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="panel-block">
+                                    <div class="field">
+                                        <p class="control amount coin2">
+                                            <input class="input" type="text" v-model="coin2Amount" placeholder="0.00">
+                                            <span class="coin is-uppercase">
+                                                {{coin2}}
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="panel-block">
+                                    <button v-if="!wifKey" v-on:click="showLogin" class="button is-warning">
+                                        Login to Trade
+                                    </button>
+                                    <button v-if="wifKey" v-on:click="makeMarketOrder" class="button is-warning">
+                                        Make Order
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
-            <div class="column">
-                <div class="panel trades-history">
+
+
+
+            <div class="column trades-history is-narrow">
+                <div class="panel" style="width:400px">
                     <p class="panel-heading">Trades</p>
 
                     <div class="panel-block">
@@ -188,45 +244,7 @@
             </div>
 
 
-            <div class="column is-narrow">
-                <div class="" style="width: 300px;">
-                    <div class="panel sidebar">
-                        <p class="panel-tabs">
-                            <a v-bind:class="{ 'is-active': orderType=='sell' }" v-on:click="orderType='sell'">SELL</a>
-                            <a v-bind:class="{ 'is-active': orderType=='buy' }" v-on:click="orderType='buy'">BUY</a>
-                        </p>
-                        <div class="panel-block">
-                            <div class="field">
-                                <p class="control amount coin1">
-                                    <input class="input" type="text" v-model="coin1Amount" placeholder="0.00">
-                                    <span class="coin is-uppercase">
-                                        {{coin1}}
-                                    </span>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="panel-block">
-                            <div class="field">
-                                <p class="control amount coin2">
-                                    <input class="input" type="text" v-model="coin2Amount" placeholder="0.00">
-                                    <span class="coin is-uppercase">
-                                        {{coin2}}
-                                    </span>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="panel-block">
-                            <button v-if="!wifKey" v-on:click="showLogin" class="button is-warning">
-                                Login to Trade
-                            </button>
-                            <button v-if="wifKey" v-on:click="makeMarketOrder" class="button is-warning">
-                                Make Order
-                            </button>
-                        </div>
 
-                    </div>
-                </div>
-            </div>
         </div>
 
 
@@ -258,7 +276,8 @@
     <script src="axios.min.js"></script>
     <script src="vue.js"></script>
     <script src="vue-router.js"></script>
-
+    <script src="highcharts.js"></script>
+    <script src="./vueapp/depth-chart.js"></script>
     <script src="./vueapp/global-filters.js"></script>
     <script src="./vueapp/main.js"></script>
 
