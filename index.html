@@ -120,7 +120,7 @@
                                         <tr v-for="b in order_book.bids" v-bind:key="b.index">
                                             <td>{{b.bid}}</td>
                                             <td>{{b.bidssum }}</td>
-                                            <td>{{b.price}}</td>
+                                            <td>{{b.price | fixedpoint8}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -136,7 +136,7 @@
                                     </thead>
                                     <tbody>
                                         <tr v-for="a in order_book.asks" v-bind:key="a.index">
-                                            <td>{{a.price }}</td>
+                                            <td>{{a.price | fixedpoint8 }}</td>
                                             <td>{{a.askssum }}</td>
                                             <td>{{a.ask }}</td>
                                         </tr>
@@ -175,7 +175,7 @@
                                     <!--<td>{{record.tradeID}}</td>-->
                                     <td>{{record.base_volume}}</td>
                                     <td>{{record.quote_volume}}</td>
-                                    <td>{{record.price}}</td>
+                                    <td>{{record.price | fixedpoint8}}</td>
                                     <td>{{record.type}}</td>
                                 </tr>
                             </tbody>

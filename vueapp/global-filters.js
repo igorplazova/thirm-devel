@@ -50,3 +50,8 @@ Vue.filter('timeago', function (time) {
                 ) + templates.suffix;
 
 })
+
+
+Vue.filter('fixedpoint8', function(number){
+    return number.toFixed(8);
+})
