@@ -108,39 +108,43 @@
                     <div class="panel-block">
                         <div class="tile is-ancestor">
                             <div class="tile">
-                                <table id="bids-table" class="table is-striped is-narrow is-hoverable is-fullwidth">
+                                <table id="bids-table" class="table  is-narrow is-hoverable is-fullwidth">
                                     <thead>
                                         <tr>
                                             <th scope="col">Bids</th>
                                             <th scope="col">Bids Sum</th>
                                             <th scope="col">Rate</th>
                                         </tr>
+                                    </thead>
+                                    <tbody>
                                         <tr v-for="b in order_book.bids" v-bind:key="b.index">
                                             <td>{{b.bid}}</td>
                                             <td>{{b.bidssum }}</td>
                                             <td>{{b.price}}</td>
                                         </tr>
-                                    </thead>
+                                    </tbody>
                                 </table>
                             </div>
                             <div class="tile">
-                                <table id="asks-table" class="table is-striped is-narrow is-hoverable is-fullwidth">
+                                <table id="asks-table" class="table  is-narrow is-hoverable is-fullwidth">
                                     <thead>
                                         <tr>
                                             <th scope="col">Rate</th>
                                             <th scope="col">Asks Sum</th>
                                             <th scope="col">Asks</th>
                                         </tr>
+                                    </thead>
+                                    <tbody>
                                         <tr v-for="a in order_book.asks" v-bind:key="a.index">
                                             <td>{{a.price }}</td>
                                             <td>{{a.askssum }}</td>
                                             <td>{{a.ask }}</td>
                                         </tr>
-                                    </thead>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
-
+                        <br />
                     </div>
 
 
@@ -154,7 +158,7 @@
                     <p class="panel-heading">Trades</p>
 
                     <div class="panel-block">
-                        <table id="trade-history-table" class="table is-striped is-narrow is-hoverable is-fullwidth">
+                        <table id="trade-history-table" class="table  is-narrow is-hoverable is-fullwidth">
                             <thead>
                                 <tr>
                                     <th scope="col">Time</th>
@@ -164,6 +168,8 @@
                                     <th scope="col">Rate</th>
                                     <th scope="col">Type</th>
                                 </tr>
+                            </thead>
+                            <tbody>
                                 <tr v-for="record in trade_history" v-bind:key="record.tradeID">
                                     <td>{{record.trade_timestamp | timeago }}</td>
                                     <!--<td>{{record.tradeID}}</td>-->
@@ -172,7 +178,7 @@
                                     <td>{{record.price}}</td>
                                     <td>{{record.type}}</td>
                                 </tr>
-                            </thead>
+                            </tbody>
                         </table>
                     </div>
 

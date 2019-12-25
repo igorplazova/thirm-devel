@@ -14,7 +14,10 @@ $table-background-color:$scheme-main;
 $orange:orange;
 $link-hover:$orange;
 
-
+$table-striped-row-even-background-color:hsl(0,0%,15%);
+$table-striped-row-even-hover-background-color:hsl(0,0%,20%);
+$table-row-hover-background-color:hsl(0,0%,10%);
+$table-cell-border: solid 1px hsl(0,0%,8%);
 @import "../node_modules/bulma/bulma.sass";
 
 
