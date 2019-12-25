@@ -45,8 +45,12 @@ $panel-border:1px solid $grey;
 .amount{
     position: relative;
 }
-.amount .coin{
+.amount .coin, .coin1-coin2-rate .price{
     position: absolute;
     right: 5px;
     top: 8px;
+}
+
+.is-blur{
+    filter: blur(3px);
 }

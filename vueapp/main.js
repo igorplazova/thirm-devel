@@ -11,9 +11,10 @@ var tradeApp = new Vue({
             isLoginActive: null,
             orderType: 'sell',
             order_book:[],
+            coin1coin2rate:null,
             coin1Amount:null,
-            coin2Amount:null,
-            depthChart:null
+            depthChart:null,
+            coinsAmountComputedTime:null
         };
         data.coins = [{ symbol: 'btc' }, { symbol: 'ltc' }, { symbol: 'usdt' }, { symbol: 'eth' }];
         data.altcoins = data.coins.filter((function (c) { return c.symbol != 'btc' }));
@@ -38,7 +39,35 @@ var tradeApp = new Vue({
         updateTradesHistory:updateTradesHistory,
         updateOrderBook:updateOrderBook,
         updateDepthChart:updateDepthChart
-    }
+    },
+    computed: {
+        coin2Amount: {
+            // getter
+            get: function () {
+                return roundNum(this.coin1Amount * this.coin1coin2rate, 6);
+              
+            },
+            // setter
+            set: function (value) {
+              if (new Date().getTime()- this.coinsAmountComputedTime < 200) return;
+              this.coin1Amount = roundNum(value / this.coin1coin2rate, 6);
+              this.coinsAmountComputedTime = (new Date()).getTime();
+            }
+        },
+        coin1Amount: {
+            // getter
+            get: function () {
+                return roundNum(this.coin2Amount / this.coin1coin2rate,6);
+              
+            },
+            // setter
+            set: function (value) {
+              if (new Date().getTime()- this.coinsAmountComputedTime < 200) return;
+              this.coin2Amount = roundNum(value * this.coin1coin2rate,6);
+              this.coinsAmountComputedTime = (new Date()).getTime();
+            }
+        }
+      }
 });
 
 
@@ -142,3 +171,7 @@ function getUrlParameter(ParamName) {
     var results = regex.exec(window.location.href);
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 };
+
+function roundNum(value, decimals) {
+    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+} 
