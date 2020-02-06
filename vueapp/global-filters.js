@@ -55,3 +55,8 @@ Vue.filter('timeago', function (time) {
 Vue.filter('fixedpoint8', function(number){
     return number.toFixed(8);
 })
+
+
+Vue.filter('fixedpoint4', function(number){
+    return number.toFixed(4);
+})

@@ -4,8 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="bulma.min.css">
-
+    
     <!-- Primary Meta Tags -->
     <title>THIRM - Anonymous Fee-less Crypto Exchange</title>
     <meta name="title" content="THIRM - Anonymous Fee-less Crypto Exchange">
@@ -29,7 +28,7 @@
     <meta property="twitter:image" content="">
 
     <title>THIRM</title>
-
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet' type='text/css'>
     <link href="css/my-customized-bulma.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -128,8 +127,8 @@
                                             </thead>
                                             <tbody>
                                                 <tr v-for="b in order_book.bids" v-bind:key="b.index">
-                                                    <td>{{b.bid}}</td>
-                                                    <td>{{b.bidssum }}</td>
+                                                    <td>{{b.bid | fixedpoint4}}</td>
+                                                    <td>{{b.bidssum | fixedpoint4}}</td>
                                                     <td>{{b.price | fixedpoint8}}</td>
                                                 </tr>
                                             </tbody>
@@ -147,8 +146,8 @@
                                             <tbody>
                                                 <tr v-for="a in order_book.asks" v-bind:key="a.index">
                                                     <td>{{a.price | fixedpoint8 }}</td>
-                                                    <td>{{a.askssum }}</td>
-                                                    <td>{{a.ask }}</td>
+                                                    <td>{{a.askssum | fixedpoint4 }}</td>
+                                                    <td>{{a.ask | fixedpoint4 }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -246,8 +245,8 @@
                                 <tr v-for="record in trade_history" v-bind:key="record.tradeID">
                                     <td>{{record.trade_timestamp | timeago }}</td>
                                     <!--<td>{{record.tradeID}}</td>-->
-                                    <td>{{record.base_volume}}</td>
-                                    <td>{{record.quote_volume}}</td>
+                                    <td>{{record.base_volume | fixedpoint4}}</td>
+                                    <td>{{record.quote_volume | fixedpoint4}}</td>
                                     <td>{{record.price | fixedpoint8}}</td>
                                     <td>{{record.type}}</td>
                                 </tr>

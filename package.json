@@ -6,7 +6,7 @@
   "scripts": {
     "css-build": "node-sass --omit-source-map-url sass/mystyles.scss css/my-customized-bulma.css",
     "css-watch": "npm run css-build -- --watch",
-    "start": "npm run css-watch"
+    "start": "npm run css-build"
   },
   "repository": {
     "type": "git",

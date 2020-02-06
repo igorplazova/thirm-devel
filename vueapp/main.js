@@ -24,10 +24,8 @@ var tradeApp = new Vue({
         return data;
     },
     mounted() {
-        setInterval(this.updateTradesHistory,
-            3000);
-        setInterval(this.updateOrderBook,
-            3000);
+        this.updateTradesHistory(3000);
+        this.updateOrderBook(3000);
 
     },
     methods: {
@@ -123,7 +121,7 @@ function makeMarketOrder() {
     
 }
 
-function updateTradesHistory() {
+function updateTradesHistory(repeat) {
     axios
         .get("https://api1.thirm.com/public/trades/" + this.coin1 + "_" + this.coin2)
         .then(response => {
@@ -132,10 +130,18 @@ function updateTradesHistory() {
             if (t_hist_len) {
                 this.last_trade = this.trade_history[t_hist_len - 1];
             }
+            
+        }).catch((error) => {
+            // error
+        }).then(() => {
+            if (repeat){
+                setTimeout(this.updateTradesHistory, repeat);
+            }
+            // always executed
         })
 }
 
-function updateOrderBook(){
+function updateOrderBook(repeat){
     axios
     .get("https://api1.thirm.com/public/orderbook/" + this.coin1 + "_" + this.coin2)
     .then(response => {
@@ -162,6 +168,13 @@ function updateOrderBook(){
         this.order_book = {bids:bids,asks:asks}
 
         this.updateDepthChart();
+    }).catch((error) => {
+        // error
+    }).then(() => {
+        if (repeat){
+            setTimeout(this.updateOrderBook,repeat)
+        }
+        // always executed
     })
 }
 
